@@ -1,1 +1,89 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mini Operating System Simulator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span>OS</span><div><h2>Mini Simulator</h2><p>Python Web App</p></div></div>
+    <a href="#dashboard" class="nav active">Dashboard</a>
+    <a href="#cpu" class="nav">CPU Scheduling</a>
+    <a href="#page" class="nav">Page Replacement</a>
+    <a href="#deadlock" class="nav">Deadlock Handling</a>
+    <div class="status"><span></span> System Ready</div>
+  </aside>
+
+  <main class="content">
+    <section id="dashboard" class="hero">
+      <div>
+        <p class="tag">CSE 3203 Assignment</p>
+        <h1>Mini Operating System Simulator</h1>
+        <p class="sub">A clean web based OS simulator made with <b>Python Flask</b>, HTML and CSS. This project includes the easiest 3 required modules with live output visualization.</p>
+        <div class="hero-actions"><a href="#cpu">Start Simulation</a><a class="ghost" href="#deadlock">Check Safe State</a></div>
+      </div>
+      <div class="glass-card">
+        <h3>Selected Modules</h3>
+        <div class="mini-list"><span>01</span><p>CPU Scheduling</p></div>
+        <div class="mini-list"><span>02</span><p>Page Replacement</p></div>
+        <div class="mini-list"><span>03</span><p>Banker's Algorithm</p></div>
+      </div>
+    </section>
+
+    <section class="cards">
+      <div class="stat"><h3>3</h3><p>Implemented Modules</p></div>
+      <div class="stat"><h3>4</h3><p>Scheduling Algorithms</p></div>
+      <div class="stat"><h3>3</h3><p>Page Replacement Algorithms</p></div>
+      <div class="stat"><h3>100%</h3><p>Beginner Friendly UI</p></div>
+    </section>
+
+    <section id="cpu" class="panel">
+      <div class="panel-head"><div><p class="tag">Module 1</p><h2>CPU Scheduling Simulator</h2></div><button onclick="addProcess()">+ Add Process</button></div>
+      <div class="control-grid">
+        <label>Algorithm<select id="cpuAlgo"><option>FCFS</option><option>SJF</option><option>RR</option><option>Priority</option></select></label>
+        <label>Time Quantum<input id="quantum" type="number" value="2" min="1"></label>
+        <button class="run" onclick="runCPU()">Run CPU Scheduling</button>
+      </div>
+      <div class="table-wrap"><table id="processTable"><thead><tr><th>PID</th><th>Arrival Time</th><th>Burst Time</th><th>Priority</th><th>Action</th></tr></thead><tbody></tbody></table></div>
+      <h3>Gantt Chart</h3><div id="gantt" class="gantt"></div>
+      <div id="cpuMetrics" class="result-grid"></div>
+    </section>
+
+    <section id="page" class="panel">
+      <div class="panel-head"><div><p class="tag">Module 3</p><h2>Page Replacement Simulator</h2></div></div>
+      <div class="control-grid three">
+        <label>Algorithm<select id="pageAlgo"><option>FIFO</option><option>LRU</option><option>Optimal</option></select></label>
+        <label>Number of Frames<input id="frames" type="number" value="3" min="1"></label>
+        <label>Reference String<input id="reference" value="7 0 1 2 0 3 0 4 2 3 0 3"></label>
+        <button class="run" onclick="runPage()">Run Page Replacement</button>
+      </div>
+      <div id="pageStats" class="result-grid"></div>
+      <div id="frameView" class="frame-view"></div>
+    </section>
+
+    <section id="deadlock" class="panel">
+      <div class="panel-head"><div><p class="tag">Module 5</p><h2>Deadlock Handling - Banker's Algorithm</h2></div></div>
+      <p class="hint">Default input is a standard safe-state example. You can edit resources A, B, C values.</p>
+      <div class="banker-grid">
+        <label>Available Resources<input id="available" value="3 3 2"></label>
+        <label>Maximum Matrix<textarea id="maximum">7 5 3
+3 2 2
+9 0 2
+2 2 2
+4 3 3</textarea></label>
+        <label>Allocation Matrix<textarea id="allocation">0 1 0
+2 0 0
+3 0 2
+2 1 1
+0 0 2</textarea></label>
+      </div>
+      <button class="run wide" onclick="runBanker()">Check Safe State</button>
+      <div id="bankerResult" class="banker-result"></div>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
